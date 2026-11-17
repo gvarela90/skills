@@ -1,7 +1,7 @@
 ---
 name: implement
-description: "Implement a piece of work based on a spec or set of tickets."
-disable-model-invocation: true
+description: Implements a piece of work from a spec or a set of tickets. The factory builder agent may call it for a ticket's build.
+user-invocable: false
 ---
 
 Implement the work described by the user in the spec or tickets.

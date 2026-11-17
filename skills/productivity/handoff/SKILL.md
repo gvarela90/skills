@@ -1,8 +1,8 @@
 ---
 name: handoff
-description: Compact the current conversation into a handoff document for another agent to pick up.
+description: Compacts the current conversation into a handoff document for another session. The factory router calls it for `/factory handoff`, and long sessions call it before the context fills.
 argument-hint: "What will the next session be used for?"
-disable-model-invocation: true
+user-invocable: false
 ---
 
 Write a handoff document summarising the current conversation so a fresh agent can continue the work. Save to the temporary directory of the user's OS (`$TMPDIR`, else `/tmp`; `%TEMP%` on Windows) - not the current workspace.

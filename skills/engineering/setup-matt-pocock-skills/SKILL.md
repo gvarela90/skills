@@ -1,7 +1,7 @@
 ---
 name: setup-matt-pocock-skills
-description: "Configure this repo for the engineering skills: set up its issue tracker, triage label vocabulary, and domain doc layout. Run once before first use of the other engineering skills."
-disable-model-invocation: true
+description: Configures a repo for the engineering skills: issue tracker, triage labels, domain doc layout. `/factory init` calls it once per product repo.
+user-invocable: false
 ---
 
 # Setup Matt Pocock's Skills

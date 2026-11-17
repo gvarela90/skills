@@ -1,7 +1,7 @@
 ---
 name: improve-codebase-architecture
-description: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
-disable-model-invocation: true
+description: Scans a codebase for deepening opportunities, reports them as an HTML page, then grills through the one picked. The factory router calls it for periodic architecture review and `/factory plan:arch`.
+user-invocable: false
 ---
 
 # Improve Codebase Architecture

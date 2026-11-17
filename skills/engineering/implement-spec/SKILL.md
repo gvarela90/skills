@@ -1,7 +1,7 @@
 ---
 name: implement-spec
-description: "Implement the result of /to-spec and /to-tickets in code."
-disable-model-invocation: true
+description: Implements the output of `to-spec` and `to-tickets` in code. The factory builder agent may call it when a ticket points at a signed spec.
+user-invocable: false
 ---
 
 You have been provided a spec. This spec should have tickets associated with it, describing how to implement the spec.
