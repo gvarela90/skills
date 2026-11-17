@@ -1,7 +1,7 @@
 ---
 name: grill-with-docs
-description: A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go.
-disable-model-invocation: true
+description: Interview that also writes GLOSSARY.md and ADRs as decisions land. The factory router calls it for the language and architecture stages (`/factory plan:lang`, `/factory plan:arch`).
+user-invocable: false
 ---
 
 Call the Skill tool twice, for "grilling" and "domain-modeling".
