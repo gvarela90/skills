@@ -1,14 +1,14 @@
 ---
 name: to-tickets
-description: Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published to the configured tracker (edges as text in one file per ticket locally, or native blocking links on a real tracker).
-disable-model-invocation: true
+description: Breaks an epic spec into tracer-bullet factory tickets on GitHub Issues (factory-ticket template, risk and surface labels, epic milestone). The factory router calls it for the tickets stage (`/factory plan:tickets`) and after a spec is signed.
+user-invocable: false
 ---
 
 # To Tickets
 
 Break a plan, spec, or conversation into a set of **tickets**: tracer-bullet vertical slices, each declaring the tickets that **block** it.
 
-The issue tracker and triage label vocabulary should have been provided to you. If not, tell the user to run `/setup-matt-pocock-skills`.
+Tickets go to the repo's GitHub Issues through `gh`, as **factory tickets**: the build queue of the software factory. The labels, the active milestone and the protected paths live in `factory/config.json`.
 
 ## Process
 
@@ -55,51 +55,44 @@ Ask the user:
 
 Iterate until the user approves the breakdown.
 
-### 5. Publish the tickets to the configured tracker
+### 5. Publish the tickets as factory tickets
 
-Publish the approved tickets. **How** depends on the tracker `/setup-matt-pocock-skills` configured; the tickets are the same either way, only the shape of the blocking edges changes:
+Size each ticket **S** or **M**: one ticket fits one fresh agent session (about 100K tokens). Split anything larger before publishing.
 
-- **Local files** → write one file per ticket under `.scratch/<feature-slug>/issues/<NN>-<slug>.md`, numbered from `01` in dependency order (blockers first). Each file's "Blocked by" lists the numbers/titles it depends on. Use the per-ticket file template below: one ticket per file, never a single combined file.
-- **A real issue tracker (GitHub, Linear, …)** → publish one issue per ticket in dependency order (blockers first) so each ticket's blocking edges can reference real identifiers. Use the platform's native blocking relationship where it has one; otherwise set each ticket's "Blocked by" to the blocking issues. If the source was an existing issue, make each ticket its sub-issue (tracker doc's operation). Apply the `ready-for-agent` triage label unless instructed otherwise; the tickets are agent-grabbable by construction.
+Publish the approved tickets to GitHub Issues with `gh issue create`, one per ticket, in dependency order (blockers first), so each ticket's `## Dependencies` can name real issue numbers. For each ticket:
 
-Work the **frontier**: any ticket whose blockers are all done. For a purely linear chain that means top to bottom.
+- **Body**: the `factory-ticket` template below, headings exactly as written (the `ready-check` script parses them).
+- **Labels**: `factory`, one of `risk:low|risk:medium|risk:high`, plus `surface:ui` when it changes a screen and `surface:security` when it touches auth, input handling, secrets, rate limits or webhooks.
+- **Milestone**: the epic's milestone, named like `active_milestone` in `factory/config.json` (`Epic <letter> - <title>`); create it with `gh api` if it is missing.
+
+Done when every story of the epic has at least one published ticket and every ticket carries the factory label, a risk label and the milestone.
 
 Do NOT close or modify any parent issue.
 
-<local-ticket-template>
+<factory-ticket-template>
 
-# <NN>: <Ticket title>
-
-**What to build:** the end-to-end behaviour this ticket makes work, from the user's perspective, not a layer-by-layer implementation list.
-
-**Blocked by:** the numbers/titles of the tickets that gate this one, or "None (can start immediately)".
-
-**Status:** ready-for-agent
-
-- [ ] Acceptance criterion 1
-- [ ] Acceptance criterion 2
-
-</local-ticket-template>
-
-<issue-template>
-
-## Parent
-
-A reference to the parent issue on the tracker (if the source was an existing issue, otherwise omit this section).
-
-## What to build
-
-The end-to-end behaviour this ticket makes work, from the user's perspective, not layer-by-layer implementation.
+## Story
+C2: Group reports by topic (epic C)
 
 ## Acceptance criteria
+1. <criterion>. **How to verify:** <command | screen and what it shows | query and expected result>
+2. …
 
-- [ ] Criterion 1
-- [ ] Criterion 2
+## Frame
+<story>/<screen> (approved), or "No UI"
 
-## Blocked by
+## Scenarios
+tests/scenarios/C2.yaml: C2-happy, C2-ai-down, …
 
-- A reference to each blocking ticket, or "None (can start immediately)". Omit this section when blockers were set as native edges.
+## Dependencies
+blocked by #26   (or "None")
 
-</issue-template>
+## Size
+M
 
-In either form, avoid specific file paths or code snippets: they go stale fast. Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it and note briefly that it came from a prototype. Trim to the decision-rich parts, not a working demo, just the important bits.
+## Notes
+<context the builder needs that is not in the spec>
+
+</factory-ticket-template>
+
+Avoid specific file paths or code snippets: they go stale fast. Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it and note briefly that it came from a prototype. Trim to the decision-rich parts, not a working demo, just the important bits.

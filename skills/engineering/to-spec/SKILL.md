@@ -1,12 +1,12 @@
 ---
 name: to-spec
-description: "Turn the current conversation into a spec and publish it to the project issue tracker: no interview, just synthesis of what you've already discussed."
-disable-model-invocation: true
+description: Synthesizes the conversation into an epic spec at `docs/specs/<epic>.md` (status: draft), no interview. The factory router calls it for the spec stage (`/factory plan:spec`).
+user-invocable: false
 ---
 
 This skill takes the current conversation context and codebase understanding and produces a spec. Do NOT interview the user; just synthesize what you already know.
 
-The issue tracker and triage label vocabulary should have been provided to you. If not, tell the user to run `/setup-matt-pocock-skills`.
+A spec covers one **epic**: the letter that groups its stories in `docs/REQUIREMENTS.md` (A, B, C…).
 
 ## Process
 
@@ -16,7 +16,20 @@ The issue tracker and triage label vocabulary should have been provided to you. 
 
 Check with the user that these seams match their expectations.
 
-3. Write the spec using the template below, then publish it to the project issue tracker. Apply the `ready-for-agent` triage label - no need for additional triage.
+3. Write the spec to `docs/specs/<epic>.md`: the frontmatter below, then the template body. It is born `status: draft`; the user signs it later (`/factory approve spec <epic>`), so it stays in the repo and goes to no issue tracker. Done when every story of the epic in `docs/REQUIREMENTS.md` appears in `stories` and in the User Stories list.
+
+<spec-frontmatter>
+
+---
+epic: C
+title: <epic title from REQUIREMENTS.md>
+status: draft           # draft | signed
+signed_at:              # filled when the user signs
+stories: [C1, C2, C3]   # every story ID of the epic
+frames: []              # stories with UI and their frame from docs/design/frames.md
+---
+
+</spec-frontmatter>
 
 <spec-template>
 
@@ -30,9 +43,9 @@ The solution to the problem, from the user's perspective.
 
 ## User Stories
 
-A LONG, numbered list of user stories. Each user story should be in the format of:
+A LONG, numbered list of user stories, each led by its story ID from `docs/REQUIREMENTS.md` (stories you add get the next free ID of the epic). Each user story should be in the format of:
 
-1. As an <actor>, I want a <feature>, so that <benefit>
+1. C1: As an <actor>, I want a <feature>, so that <benefit>
 
 <user-story-example>
 1. As a mobile bank customer, I want to see balance on my accounts, so that I can make better informed decisions about my spending
