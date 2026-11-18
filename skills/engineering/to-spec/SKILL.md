@@ -6,7 +6,7 @@ user-invocable: false
 
 This skill takes the current conversation context and codebase understanding and produces a spec. Do NOT interview the user; just synthesize what you already know.
 
-A spec covers one **epic**: the letter that groups its stories in `docs/REQUIREMENTS.md` (A, B, C…).
+A spec covers one **epic**: the `## Epic <id> - <title>` section that groups its stories in `docs/REQUIREMENTS.md` (epic `e3-csv-export`, stories `e3-<story-slug>`).
 
 ## Process
 
@@ -16,17 +16,19 @@ A spec covers one **epic**: the letter that groups its stories in `docs/REQUIREM
 
 Check with the user that these seams match their expectations.
 
-3. Write the spec to `docs/specs/<epic>.md`: the frontmatter below, then the template body. It is born `status: draft`; the user signs it later (`/factory approve spec <epic>`), so it stays in the repo and goes to no issue tracker. Done when every story of the epic in `docs/REQUIREMENTS.md` appears in `stories` and in the User Stories list.
+3. Write the spec to `docs/specs/<epic>.md`: the frontmatter below, then the template body. It is born `status: draft`; the user signs it later (`/factory approve spec <epic>`), so it stays in the repo and goes to no issue tracker. Done when every story of the epic in `docs/REQUIREMENTS.md` appears in `stories` and in the User Stories list, and `security` and `personal_data` each say `yes` or `no`. Autopilot L3 may sign a spec that says `no` to both without the user, so `yes` is the answer whenever you are unsure.
 
 <spec-frontmatter>
 
 ---
-epic: C
+epic: e3-csv-export
 title: <epic title from REQUIREMENTS.md>
 status: draft           # draft | signed
 signed_at:              # filled when the user signs
-stories: [C1, C2, C3]   # every story ID of the epic
+stories: [e3-export-all, e3-filter-dates]   # every story ID of the epic
 frames: []              # stories with UI and their frame from docs/design/frames.md
+security: no            # yes when the epic touches auth, sessions, permissions, secrets or input from outside the app
+personal_data: no       # yes when the app stores or shows data about a person: name, contact, address, unit number
 ---
 
 </spec-frontmatter>
