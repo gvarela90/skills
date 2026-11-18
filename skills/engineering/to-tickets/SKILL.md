@@ -62,7 +62,7 @@ Size each ticket **S** or **M**: one ticket fits one fresh agent session (about 
 Publish the approved tickets to GitHub Issues with `gh issue create`, one per ticket, in dependency order (blockers first), so each ticket's `## Dependencies` can name real issue numbers. For each ticket:
 
 - **Body**: the `factory-ticket` template below, headings exactly as written (the `ready-check` script parses them).
-- **Labels**: `factory`, one of `risk:low|risk:medium|risk:high`, plus `surface:ui` when it changes a screen and `surface:security` when it touches auth, input handling, secrets, rate limits or webhooks.
+- **Labels**: `factory`, one of `risk:low|risk:medium|risk:high`, plus `surface:ui` when it changes a screen (a page, form or button counts, styled or not) and `surface:security` when it touches auth, input handling, secrets, rate limits or webhooks.
 - **Milestone**: the epic's milestone, named like `active_milestone` in `factory/config.json` (`Epic <epic> - <title>`); create it with `gh api` if it is missing.
 
 Done when every story of the epic has at least one published ticket and every ticket carries the factory label, a risk label and the milestone.
@@ -79,10 +79,11 @@ e3-group-by-topic — Group reports by topic (epic e3-ai-classification)
 2. …
 
 ## Frame
-<story>/<screen> (approved), or "No UI"
+<story>/<screen> (approved), "Plain UI", or "No UI"
+(Plain UI: a screen with browser defaults and no frame, only where factory/config.json has "design": { "plain_ui": true }. A ticket that builds a page, form or button is never "No UI".)
 
 ## Scenarios
-tests/scenarios/C2.yaml: C2-happy, C2-ai-down, …
+tests/scenarios/e3-group-by-topic.yaml: e3-group-by-topic-happy, e3-group-by-topic-ai-down, …
 
 ## Dependencies
 blocked by #26   (or "None")
