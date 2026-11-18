@@ -63,7 +63,7 @@ Publish the approved tickets to GitHub Issues with `gh issue create`, one per ti
 
 - **Body**: the `factory-ticket` template below, headings exactly as written (the `ready-check` script parses them).
 - **Labels**: `factory`, one of `risk:low|risk:medium|risk:high`, plus `surface:ui` when it changes a screen and `surface:security` when it touches auth, input handling, secrets, rate limits or webhooks.
-- **Milestone**: the epic's milestone, named like `active_milestone` in `factory/config.json` (`Epic <letter> - <title>`); create it with `gh api` if it is missing.
+- **Milestone**: the epic's milestone, named like `active_milestone` in `factory/config.json` (`Epic <epic> - <title>`); create it with `gh api` if it is missing.
 
 Done when every story of the epic has at least one published ticket and every ticket carries the factory label, a risk label and the milestone.
 
@@ -72,7 +72,7 @@ Do NOT close or modify any parent issue.
 <factory-ticket-template>
 
 ## Story
-C2: Group reports by topic (epic C)
+e3-group-by-topic — Group reports by topic (epic e3-ai-classification)
 
 ## Acceptance criteria
 1. <criterion>. **How to verify:** <command | screen and what it shows | query and expected result>
