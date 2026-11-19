@@ -83,7 +83,8 @@ e3-group-by-topic — Group reports by topic (epic e3-ai-classification)
 (Plain UI: a screen with browser defaults and no frame, only where factory/config.json has "design": { "plain_ui": true }. A ticket that builds a page, form or button is never "No UI".)
 
 ## Scenarios
-tests/scenarios/e3-group-by-topic.yaml: e3-group-by-topic-happy, e3-group-by-topic-ai-down, …
+tests/scenarios/e3-group-by-topic.yaml: e3-group-by-topic-happy, e3-group-by-topic-ai-down
+(Name every scenario id this ticket turns green, and only those. Verify checks those ids as the ticket's own; scenarios an earlier ticket already made green run anyway as the regression suite.)
 
 ## Dependencies
 blocked by #26   (or "None")
