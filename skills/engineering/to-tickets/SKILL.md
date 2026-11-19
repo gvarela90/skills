@@ -79,8 +79,8 @@ e3-group-by-topic — Group reports by topic (epic e3-ai-classification)
 2. …
 
 ## Frame
-<story>/<screen> (approved), "Plain UI", or "No UI"
-(Plain UI: a screen with browser defaults and no frame, only where factory/config.json has "design": { "plain_ui": true }. A ticket that builds a page, form or button is never "No UI".)
+<story>/<screen> (approved), "System UI", "Plain UI", or "No UI"
+(The story's Frame column decides: its frame ids, or "System UI", a screen built from the approved design system, docs/design/DESIGN.md, with no frame. Plain UI: a screen with browser defaults and no frame, only where factory/config.json has "design": { "plain_ui": true }. A ticket that builds a page, form or button is never "No UI".)
 
 ## Scenarios
 tests/scenarios/e3-group-by-topic.yaml: e3-group-by-topic-happy, e3-group-by-topic-ai-down
