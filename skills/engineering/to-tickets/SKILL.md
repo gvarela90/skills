@@ -84,7 +84,7 @@ e3-group-by-topic — Group reports by topic (epic e3-ai-classification)
 
 ## Scenarios
 tests/scenarios/e3-group-by-topic.yaml: e3-group-by-topic-happy, e3-group-by-topic-ai-down
-(Name every scenario id this ticket turns green, and only those. Verify checks those ids as the ticket's own; scenarios an earlier ticket already made green run anyway as the regression suite.)
+(Name every scenario id this ticket turns green, and only those. Verify checks those ids as the ticket's own; scenarios an earlier ticket already made green run anyway as the regression suite. A "No UI" ticket without surface:ui that turns no id green writes one line `none: <reason>` instead, e.g. `none: server tests and pnpm check only`; verify then checks only for regressions.)
 
 ## Dependencies
 blocked by #26   (or "None")
