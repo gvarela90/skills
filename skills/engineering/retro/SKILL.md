@@ -1,7 +1,6 @@
 ---
 name: retro
 description: Retrospective on a coding session or an epic. The factory router calls it for `/factory retro`.
-user-invocable: false
 ---
 
 The user has asked for a **retrospective**. You are suggesting improvements to the coding agent's **environment** to improve future runs.
