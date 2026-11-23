@@ -63,9 +63,10 @@ Publish the approved tickets to GitHub Issues with `gh issue create`, one per ti
 
 - **Body**: the `factory-ticket` template below, headings exactly as written (the `ready-check` script parses them).
 - **Labels**: `factory`, one of `risk:low|risk:medium|risk:high`, plus `surface:ui` when it changes a screen (a page, form or button counts, styled or not) and `surface:security` when it touches auth, input handling, secrets, rate limits or webhooks.
+- **Area labels** (when `factory/config.json` has entries in `areas`): one `area:<name>` per entry whose path prefixes hold a file the ticket changes. The factory runs two tickets at once only when their areas differ, or their `## Touches` paths do.
 - **Milestone**: the epic's milestone, named like `active_milestone` in `factory/config.json` (`Epic <epic> - <title>`); create it with `gh api` if it is missing.
 
-Done when every story of the epic has at least one published ticket and every ticket carries the factory label, a risk label and the milestone.
+Done when every story of the epic has at least one published ticket and every ticket carries the factory label, a risk label, the milestone and, in a repo with `areas`, at least one area label.
 
 Do NOT close or modify any parent issue.
 
@@ -95,6 +96,11 @@ M
 ## Notes
 <context the builder needs that is not in the spec>
 
+## Touches
+board/src/
+src/board.ts
+(The repo paths this ticket changes, one per line; a folder ends in "/". Prefer a folder to a guess at file names. Write the section in a repo with `areas`; leave it out when the paths are unknown.)
+
 </factory-ticket-template>
 
-Avoid specific file paths or code snippets: they go stale fast. Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it and note briefly that it came from a prototype. Trim to the decision-rich parts, not a working demo, just the important bits.
+Outside `## Touches`, avoid specific file paths or code snippets: they go stale fast. Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it and note briefly that it came from a prototype. Trim to the decision-rich parts, not a working demo, just the important bits.
