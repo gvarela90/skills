@@ -31,12 +31,12 @@ Finding _facts_ is your job, never the user's. When a frontier question needs a 
 Before a question goes into a round, **triage** it:
 
 1. **Fact**: what the code does, which stack, what a doc or API says. Look it up, as above.
-2. **Evident decision**: the code, `GLOSSARY.md`, ADRs, VISION/REQUIREMENTS, the running product or a clear repo convention already implies the answer, or it is low-impact and easy to revert. Decide it yourself and record the **evidence** (file:line, doc, screen, source). A recorded evident decision is settled: the questions hanging off it join the frontier.
-3. **Real decision**: product, business, taste or copy that nothing implies; contradictory or missing evidence; less than high confidence; hard to revert (data model, auth, money, privacy, anything the end user sees). Put it to the user in a round and wait.
+2. **Evident decision**: the code, `GLOSSARY.md`, ADRs, VISION/REQUIREMENTS, an approved design (frame or design system), the running product or a clear repo convention already implies the answer, or it is easy to revert. Decide it yourself and record the **evidence** (file:line, doc, frame, screen, source). A recorded evident decision is settled: the questions hanging off it join the frontier.
+3. **Real decision**: product, business, taste or copy that nothing implies; contradictory or missing evidence; low confidence; hard to revert (data model, auth, money, privacy). Put it to the user in a round and wait.
 
-Torn between 2 and 3: it is 3.
+Torn between 2 and 3: when it is easy to revert, it is 2 with confidence `medium`, since building and review catch a wrong call; otherwise 3.
 
-The session is done when the frontier is empty: every branch of the design tree visited, nothing left silently assumed. Close with the **Auto-resolved decisions** report: every evident decision you took, numbered, for the user to ratify in block or reopen by number. Save it to `docs/decisions/auto-resolved-<YYYY-MM-DD>.md` when the repo has a `docs/` folder; when grilling a wayfinder ticket, post it in the resolution comment instead; when charting a wayfinder map, the map's Decisions so far holds them, each linking its evidence, and the charting summary asks the user to ratify them.
+The session is done when the frontier is empty: every branch of the design tree visited, nothing left silently assumed. Close with the **Auto-resolved decisions** report: every evident decision you took, numbered. It stands as written: the user may reopen any row by number, and only a row of `low` confidence or a Reversible other than `yes` waits for the user's ratification. Save it to `docs/decisions/auto-resolved-<YYYY-MM-DD>.md` when the repo has a `docs/` folder; when grilling a wayfinder ticket, post it in the resolution comment instead; when charting a wayfinder map, the map's Decisions so far holds them, each linking its evidence.
 
 ```markdown
 ---
@@ -47,4 +47,4 @@ ratification: pending   # pending | ratified | reopened
 |---|---|---|---|---|---|
 ```
 
-Act on the outcome only after the user confirms you have reached a shared understanding and ratifies the report.
+Act on the outcome once the frontier is empty and every row that waits for ratification has the user's answer.

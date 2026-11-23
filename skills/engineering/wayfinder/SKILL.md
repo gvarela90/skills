@@ -72,7 +72,7 @@ The answer isn't part of the body; it's recorded on resolution (see [Work throug
 
 ## Ticket Types
 
-Every ticket is either **HITL** (human in the loop, worked _with_ a human who speaks for themselves) or **AFK**, driven by the agent alone. A HITL ticket resolves through that live exchange, where the human speaks for every real decision. Evident decisions the agent settles itself with evidence (the `grilling` triage), listed in the ticket's Auto-resolved decisions report for the human to ratify; a grilling agent that settles a real decision on its own has broken this.
+Every ticket is either **HITL** (human in the loop, worked _with_ a human who speaks for themselves) or **AFK**, driven by the agent alone. A HITL ticket resolves through that live exchange, where the human speaks for every real decision. Evident decisions the agent settles itself with evidence (the `grilling` triage), listed in the ticket's Auto-resolved decisions report, where the human may reopen any row; a grilling agent that settles a real decision on its own has broken this.
 
 - **Research** (AFK): Reading documentation, third-party APIs, or local resources like knowledge bases to surface a fact a decision waits on. Resolved by a subagent that calls the Skill tool with "research". Use when knowledge outside the current working directory is required.
 - **Prototype** (HITL): Raise the fidelity of the discussion by making a cheap, rough, concrete artifact to react to (an outline, a rough take, a stub, or UI/logic code) by calling the Skill tool with "prototype". Links the prototype as an asset. Use when "how should it look" or "how should it behave" is the key question.
