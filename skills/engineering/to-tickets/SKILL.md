@@ -35,7 +35,7 @@ Break the work into **tracer bullet** tickets.
 
 </vertical-slice-rules>
 
-Give each ticket its **blocking edges**: the other tickets that must complete before it can start. A ticket with no blockers can start immediately.
+Give each ticket its **blocking edges**: the other tickets that must complete before it can start. A ticket with no blockers can start immediately. An edge is real only when the ticket calls or extends code the other one writes. Two tickets that change the same files have no edge: the factory holds one until the other merges. Every edge that is not real makes a chain, and in a chain one ticket that waits for the user stops all the tickets behind it.
 
 **Wide refactors are the exception to vertical slicing.** A **wide refactor** is one mechanical change (rename a column, retype a shared symbol) whose **blast radius** fans across the whole codebase, so a single edit breaks thousands of call sites at once and no vertical slice can land green. Don't force it into a tracer bullet; sequence it as **expand–contract**. First expand: add the new form beside the old so nothing breaks. Then migrate the call sites over in batches sized by blast radius (per package, per directory), each batch its own ticket blocked by the expand, keeping CI green batch to batch because the old form still exists. Finally contract: delete the old form once no caller remains, in a ticket blocked by every migrate batch. When even the batches can't stay green alone, keep the sequence but let them share an integration branch that all block a final integrate-and-verify ticket; green is promised only there.
 
@@ -99,7 +99,7 @@ M
 ## Touches
 board/src/
 src/board.ts
-(The repo paths this ticket changes, one per line; a folder ends in "/". Prefer a folder to a guess at file names. Write the section in a repo with `areas`; leave it out when the paths are unknown.)
+(The repo paths this ticket changes, one per line; a folder ends in "/". Name the narrowest path you are sure of: the file when the ticket changes a file that exists, a folder only for new files or a change across it. The factory runs two tickets side by side only when no path of one contains a path of the other, so a whole-app folder makes every ticket wait its turn. Write the section in a repo with `areas`; leave it out when the paths are unknown.)
 
 </factory-ticket-template>
 
