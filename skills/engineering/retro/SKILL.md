@@ -11,6 +11,8 @@ The user has asked for a **retrospective**. You are suggesting improvements to t
 
 2. Read the primary sources for the session the user specifies. This may mean searching through session logs on this machine. If the user doesn't specify a session, default to the current one.
 
+   In a repo that runs the factory (`factory/jobs/` exists), start from `~/.factory/bin/metrics --json`: its stops, rounds and stage minutes are the measurements. Open a job's files only for a stop or a slow stage those numbers point at.
+
 3. Look for candidates for improvement in these categories.
 
 - **Navigation**: how easy was it for the agent to find the right files? Are there hidden dependencies between files? Would a **navigation pointer** make it easier? _Use when_ the session took a long time to find a piece of information.
